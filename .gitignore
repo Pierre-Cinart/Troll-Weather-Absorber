@@ -1,0 +1,39 @@
+# =============================================
+# .gitignore - Troll Weather Absorber
+# Projet simple Phaser (CDN) - Game Jam
+# =============================================
+
+# ====================== Outils de dev ======================
+convertor.ps1
+convert-assets.ps1
+convert-to-*.ps1
+convert-to-*.php
+
+# ====================== Fichiers temporaires ======================
+*.log
+*.logs
+*.tmp
+*.backup
+*.old
+
+# ====================== Fichiers système ======================
+.DS_Store
+Thumbs.db
+*.lock
+
+# ====================== Dossiers à ignorer ======================
+assets/images/*.png
+assets/images/*.jpg
+assets/images/*.jpeg
+assets/sounds/*.mp3
+assets/sounds/*.wav
+
+# (On garde seulement les .webp et .m4a après conversion)
+
+# Dossiers qui pourraient apparaître plus tard
+node_modules/
+dist/
+build/
+coverage/
+
+# ====================== Fin du fichier ======================
