@@ -1,0 +1,23 @@
+
+        /* Style global très minimal pour le moment */
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0b0e17;           /* couleur sombre pour ambiance jeu */
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden;              /* on cache les scrollbars */
+            height: 100vh;                 /* prend toute la hauteur de l'écran */
+            display: flex;
+            justify-content: center;       /* centre horizontalement */
+            align-items: center;           /* centre verticalement */
+        }
+
+        /* Conteneur où Phaser va mettre son canvas */
+        #game-container {
+            border: 3px solid #4a5bff;
+            border-radius: 6px;
+            box-shadow: 0 0 25px rgba(74, 91, 255, 0.4);
+            background: #000;
+        }
+    
