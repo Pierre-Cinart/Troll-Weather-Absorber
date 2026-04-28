@@ -39,7 +39,7 @@ class ScnControls extends Phaser.Scene {
         // TEXTE DES CONTROLES
         // =============================================
         this.add.text(centerX, centerY, 
-            'Move : ZQSD or WASD also arrows \nJump : Space', 
+            'Move : \nleft : Q / A / <- \nright : D  / -> \nJump : Space', 
         {
             fontSize: '22px',
             fill: '#ffffff',
