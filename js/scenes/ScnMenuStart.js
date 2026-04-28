@@ -1,6 +1,6 @@
 // =============================================
 // ScnMenuStart.js
-// Menu principal avec sons UI
+// Menu principal du jeu
 // =============================================
 
 import Log from '../utils/Logger.js';
@@ -15,19 +15,18 @@ class ScnMenuStart extends Phaser.Scene {
     }
 
     preload() {
-        // Musique
+        // =============================================
+        // MUSIQUE DU MENU
+        // =============================================
         this.load.audio('menuMusic', 'assets/sounds/musics/menu.mp3');
-
     }
 
     create() {
-
         // =============================================
-        // SETUP
+        // SETUP GENERAL
         // =============================================
         const centerX = 640 / 2;
         const centerY = 480 / 2;
-
         const ui = new Button(this);
 
         AudioSettings.load();
@@ -57,15 +56,14 @@ class ScnMenuStart extends Phaser.Scene {
             fill: '#00ffcc'
         }).setOrigin(0.5);
 
-        this.add.text(centerX, 168, 'Little Guy • Big Weather', {
+        this.add.text(centerX, 168, 'Little Guy � Big Weather', {
             fontSize: '18px',
             fill: '#aaaaaa'
         }).setOrigin(0.5);
 
         // =============================================
-        // BOUTONS AVEC SON
+        // BOUTONS PRINCIPAUX
         // =============================================
-
         ui.create({
             x: centerX,
             y: 220,
@@ -75,7 +73,7 @@ class ScnMenuStart extends Phaser.Scene {
             fontSize: '22px',
             clickSound: 'clickWater',
             callback: () => {
-                Log.success('→ Lancement du jeu !');
+                Log.success('-> Lancement du jeu !');
                 this.scene.start('ScnLevel1');
             }
         });
@@ -129,17 +127,24 @@ class ScnMenuStart extends Phaser.Scene {
         });
 
         // =============================================
-        // OVERLAY AUDIO (déblocage navigateur)
+        // OVERLAY DE DEBLOCAGE AUDIO
+        // Le navigateur exige une interaction utilisateur
+        // avant de lancer certains sons.
         // =============================================
         if (!AudioManager.isAudioUnlocked) {
             this.createAudioUnlockOverlay(centerX, centerY);
-        }    
+        }
     }
 
     createAudioUnlockOverlay(centerX, centerY) {
-
+        // =============================================
+        // ETAT LOCAL
+        // =============================================
         let unlocked = false;
 
+        // =============================================
+        // FOND OVERLAY
+        // =============================================
         const overlay = this.add.rectangle(
             centerX,
             centerY,
@@ -151,16 +156,21 @@ class ScnMenuStart extends Phaser.Scene {
         .setDepth(1000)
         .setInteractive();
 
+        // =============================================
+        // TEXTE OVERLAY
+        // =============================================
         const text = this.add.text(centerX, centerY, 'PRESS ANY BUTTON', {
             fontSize: '28px',
             fill: '#ffffff'
         }).setOrigin(0.5).setDepth(1001);
 
+        // =============================================
+        // DEBLOCAGE AUDIO
+        // =============================================
         const unlock = () => {
             if (unlocked) return;
             unlocked = true;
 
-            // conserve la supression de l overlay et texte d ' actiivation de l ' audio
             AudioManager.isAudioUnlocked = true;
 
             if (AudioManager.currentMusic && !AudioManager.currentMusic.isPlaying) {

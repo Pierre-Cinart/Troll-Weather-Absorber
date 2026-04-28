@@ -1,6 +1,6 @@
 // =============================================
 // ScnCredits.js
-// Scène des crédits
+// Scene des credits
 // =============================================
 
 import Log from '../utils/Logger.js';
@@ -13,12 +13,16 @@ class ScnCredits extends Phaser.Scene {
     }
 
     create() {
+        // =============================================
+        // LOG DE SCENE
+        // =============================================
+        Log.info('ScnCredits chargee');
 
-        Log.info('ScnCredits chargée');
-
+        // =============================================
+        // SETUP GENERAL
+        // =============================================
         const centerX = 640 / 2;
         const centerY = 480 / 2;
-
         const ui = new Button(this);
 
         // =============================================
@@ -38,16 +42,17 @@ class ScnCredits extends Phaser.Scene {
         // =============================================
         // TEXTE DES CREDITS
         // =============================================
-        this.add.text(centerX, centerY, 
+        this.add.text(centerX, centerY,
             'Game by Pawat LabZ\n\nPowered by Phaser\n\nThanks for playing!',
-        {
-            fontSize: '22px',
-            fill: '#ffffff',
-            align: 'center'
-        }).setOrigin(0.5);
+            {
+                fontSize: '22px',
+                fill: '#ffffff',
+                align: 'center'
+            }
+        ).setOrigin(0.5);
 
         // =============================================
-        // BOUTON BACK
+        // BOUTON RETOUR
         // =============================================
         ui.create({
             x: centerX,
@@ -55,7 +60,7 @@ class ScnCredits extends Phaser.Scene {
             text: 'BACK',
             clickSound: 'clickWater',
             callback: () => {
-                Log.info('→ Retour menu');
+                Log.info('-> Retour menu');
                 this.scene.start('ScnMenuStart');
             }
         });

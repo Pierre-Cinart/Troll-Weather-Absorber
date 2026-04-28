@@ -1,7 +1,6 @@
 // =============================================
 // Button.js
-// Classe UI pour créer des boutons réutilisables
-// Gère : taille, couleurs, état disabled, callback, son de clic optionnel
+// Classe utilitaire pour creer des boutons UI reutilisables
 // =============================================
 
 import AudioManager from '../config/AudioManager.js';
@@ -9,6 +8,10 @@ import AudioManager from '../config/AudioManager.js';
 export default class Button {
 
     constructor(scene) {
+        // =============================================
+        // REFERENCE DE SCENE
+        // La classe travaille toujours dans une scene Phaser.
+        // =============================================
         this.scene = scene;
     }
 
@@ -17,33 +20,24 @@ export default class Button {
         y,
         text,
         callback,
-
         width = 220,
         height = 35,
         scale = 1,
-
         isDisabled = false,
-
         bgColor = 0x1e2a5e,
         hoverColor = 0x2a3b7a,
         activeColor = 0x00ffcc,
         disabledColor = 0x555555,
-
         borderSize = 3,
         borderColor = 0x4a9eff,
         borderDisabledColor = 0x777777,
-
         fontSize = '18px',
         textColor = '#ffffff',
         textDisabledColor = '#888888',
-
-        // Son optionnel au clic
-        // Exemple : clickSound: 'uiClick'
         clickSound = null
     }) {
 
         const scene = this.scene;
-
         const finalWidth = width * scale;
         const finalHeight = height * scale;
 
@@ -65,20 +59,19 @@ export default class Button {
         // TEXTE DU BOUTON
         // =============================================
         const txt = scene.add.text(x, y, text, {
-            fontSize: fontSize,
+            fontSize,
             fontStyle: 'bold',
             fill: isDisabled ? textDisabledColor : textColor
         }).setOrigin(0.5);
 
         // =============================================
-        // INTERACTION
+        // INTERACTION SOURIS
         // =============================================
         bg.setInteractive({
             useHandCursor: !isDisabled
         });
 
         if (!isDisabled) {
-
             bg.on('pointerover', () => {
                 bg.setFillStyle(hoverColor);
             });
@@ -90,11 +83,17 @@ export default class Button {
             bg.on('pointerdown', () => {
                 bg.setFillStyle(activeColor);
 
-                // Son de clic optionnel
+                // =============================================
+                // SON DE CLIC OPTIONNEL
+                // =============================================
                 if (clickSound) {
                     AudioManager.playSfx(scene, clickSound);
                 }
 
+                // =============================================
+                // CALLBACK RETARDEE
+                // Petit delai pour laisser le feedback visuel/sonore.
+                // =============================================
                 scene.time.delayedCall(80, () => {
                     if (callback) {
                         callback();
@@ -103,6 +102,9 @@ export default class Button {
             });
         }
 
-        return { bg, text: txt };
+        return {
+            bg,
+            text: txt
+        };
     }
 }

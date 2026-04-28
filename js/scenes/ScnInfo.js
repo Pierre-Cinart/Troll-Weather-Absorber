@@ -1,6 +1,6 @@
 // =============================================
 // ScnInfo.js
-// Scène d'information
+// Scene d information du projet
 // =============================================
 
 import Log from '../utils/Logger.js';
@@ -13,36 +13,49 @@ class ScnInfo extends Phaser.Scene {
     }
 
     create() {
+        // =============================================
+        // LOG DE SCENE
+        // =============================================
+        Log.info('ScnInfo chargee');
 
-        Log.info('ScnInfo chargée');
-
+        // =============================================
+        // SETUP GENERAL
+        // =============================================
         const centerX = 640 / 2;
         const centerY = 480 / 2;
-
-        // UI
         const ui = new Button(this);
 
+        // =============================================
+        // FOND
+        // =============================================
+        this.add.rectangle(centerX, centerY, 640, 480, 0x0b0e17);
 
         // =============================================
-        // TEXTE INFO
+        // TITRE INFO
         // =============================================
-        // Titre
-        this.add.text(centerX,150, 'Troll Weather Absorber - ',{
+        this.add.text(centerX, 150, 'Troll Weather Absorber', {
             fontSize: '22px',
-            fontstyle: 'bold',
+            fontStyle: 'bold',
             fill: '#00ffcc',
             align: 'center'
         }).setOrigin(0.5);
-        // Contenu
-        this.add.text(centerX, centerY ,  '\nA tiny goofy troll \nwho absorbs elements to control the weather' 
-            +'\nin fast-paced platformer levels.' 
-            + '\nMade for a game jam with themes \'Little Guy\' and \'Weather\'', {
-            fontSize: '18px',
-            fill: '#ffffff',
-            align: 'center'
-        }).setOrigin(0.5);
+
         // =============================================
-        // BOUTON RETOUR MENU
+        // CONTENU INFO
+        // =============================================
+        this.add.text(
+            centerX,
+            centerY,
+            'A tiny goofy troll\nwho absorbs elements to control the weather\nin fast-paced platformer levels.\nMade for a game jam with themes \'Little Guy\' and \'Weather\'',
+            {
+                fontSize: '18px',
+                fill: '#ffffff',
+                align: 'center'
+            }
+        ).setOrigin(0.5);
+
+        // =============================================
+        // BOUTON RETOUR
         // =============================================
         ui.create({
             x: centerX,
@@ -50,15 +63,13 @@ class ScnInfo extends Phaser.Scene {
             text: 'BACK',
             width: 220,
             height: 35,
-            clickSound: 'clickWater', // si tu veux le son
+            clickSound: 'clickWater',
             callback: () => {
-                Log.info('→ Retour menu');
+                Log.info('-> Retour menu');
                 this.scene.start('ScnMenuStart');
             }
         });
-        
     }
-    
 }
 
 export default ScnInfo;

@@ -4,12 +4,18 @@
 // =============================================
 
 const config = {
+    // =============================================
+    // RENDU GENERAL
+    // =============================================
     type: Phaser.AUTO,
     width: 640,
     height: 480,
     parent: 'game-container',
     backgroundColor: '#0b0e17',
-    
+
+    // =============================================
+    // PHYSIQUE
+    // =============================================
     physics: {
         default: 'arcade',
         arcade: {
@@ -17,13 +23,20 @@ const config = {
             debug: false
         }
     },
-    
+
+    // =============================================
+    // SCALE
+    // =============================================
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
-    
-    scene: []   // rempli dans main.js
+
+    // =============================================
+    // SCENES
+    // Remplies dans main.js au lancement.
+    // =============================================
+    scene: []
 };
 
 export default config;

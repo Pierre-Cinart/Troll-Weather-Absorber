@@ -1,6 +1,6 @@
 // =============================================
 // ScnSettings.js
-// Scène de réglage des volumes (Music + SFX)
+// Scene de reglage des volumes
 // =============================================
 
 import Log from '../utils/Logger.js';
@@ -15,16 +15,13 @@ class ScnSettings extends Phaser.Scene {
     }
 
     create() {
-
         // =============================================
-        // SETUP BASIQUE
+        // SETUP GENERAL
         // =============================================
         const centerX = 640 / 2;
         const centerY = 480 / 2;
-        // UI
         const ui = new Button(this);
 
-        // Charge les valeurs sauvegardées
         AudioSettings.load();
 
         // =============================================
@@ -65,14 +62,9 @@ class ScnSettings extends Phaser.Scene {
             y: 180,
             width: 220,
             value: AudioSettings.musicVolume,
-
             onChange: (value) => {
-                // Change le volume en direct + sauvegarde
                 AudioManager.setMusicVolume(value);
-
-                // Met à jour le texte
                 this.musicValueText.setText(`${Math.round(value * 100)}%`);
-
                 Log.info(`Music volume : ${Math.round(value * 100)}%`);
             }
         });
@@ -101,20 +93,15 @@ class ScnSettings extends Phaser.Scene {
             y: 250,
             width: 220,
             value: AudioSettings.sfxVolume,
-
             onChange: (value) => {
-                // Change le volume SFX global + sauvegarde
                 AudioManager.setSfxVolume(value);
-
-                // Met à jour le texte
                 this.sfxValueText.setText(`${Math.round(value * 100)}%`);
-
                 Log.info(`SFX volume : ${Math.round(value * 100)}%`);
             }
         });
 
         // =============================================
-        // BOUTON RETOUR MENU
+        // BOUTON RETOUR
         // =============================================
         ui.create({
             x: centerX,
@@ -124,29 +111,25 @@ class ScnSettings extends Phaser.Scene {
             height: 35,
             clickSound: 'clickWater',
             callback: () => {
-                Log.info('→ Retour menu');
+                Log.info('-> Retour menu');
                 this.scene.start('ScnMenuStart');
             }
         });
     }
 
     // =============================================
-    // FONCTION SLIDER RÉUTILISABLE
-    // value doit être entre 0 et 1
+    // SLIDER REUTILISABLE
+    // Cree un slider horizontal entre 0 et 1.
     // =============================================
     createSlider({ x, y, width, value, onChange }) {
-
         // =============================================
         // DIMENSIONS DU SLIDER
         // =============================================
         const barHeight = 8;
         const knobRadius = 12;
-
-        // Limites gauche/droite
         const startX = x - width / 2;
         const endX = x + width / 2;
 
-        // Sécurité : force la valeur entre 0 et 1
         value = Phaser.Math.Clamp(value, 0, 1);
 
         // =============================================
@@ -172,7 +155,7 @@ class ScnSettings extends Phaser.Scene {
         ).setOrigin(0, 0.5);
 
         // =============================================
-        // BOUTON ROND DU SLIDER
+        // BOUTON DU SLIDER
         // =============================================
         const knob = this.add.circle(
             startX + width * value,
@@ -184,7 +167,7 @@ class ScnSettings extends Phaser.Scene {
         knob.setStrokeStyle(3, 0x00ffcc);
 
         // =============================================
-        // FONCTION INTERNE POUR APPLIQUER UNE VALEUR
+        // FONCTION DE MISE A JOUR
         // =============================================
         const updateSlider = (pointerX) => {
             const clampedX = Phaser.Math.Clamp(pointerX, startX, endX);
@@ -207,7 +190,6 @@ class ScnSettings extends Phaser.Scene {
         });
 
         this.input.setDraggable(knob);
-
         knob.on('drag', (pointer, dragX) => {
             updateSlider(dragX);
         });

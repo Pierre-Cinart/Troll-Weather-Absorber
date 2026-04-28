@@ -1,6 +1,6 @@
 // =============================================
 // ScnControls.js
-// Scène des contrôles
+// Scene des controles
 // =============================================
 
 import Log from '../utils/Logger.js';
@@ -13,12 +13,16 @@ class ScnControls extends Phaser.Scene {
     }
 
     create() {
+        // =============================================
+        // LOG DE SCENE
+        // =============================================
+        Log.info('ScnControls chargee');
 
-        Log.info('ScnControls chargée');
-
+        // =============================================
+        // SETUP GENERAL
+        // =============================================
         const centerX = 640 / 2;
         const centerY = 480 / 2;
-
         const ui = new Button(this);
 
         // =============================================
@@ -38,16 +42,17 @@ class ScnControls extends Phaser.Scene {
         // =============================================
         // TEXTE DES CONTROLES
         // =============================================
-        this.add.text(centerX, centerY, 
-            'Move : \nleft : Q / A / <- \nright : D  / -> \nJump : Space', 
-        {
-            fontSize: '22px',
-            fill: '#ffffff',
-            align: 'left'
-        }).setOrigin(0.5);
+        this.add.text(centerX, centerY,
+            'Move :\nleft : Q / A / <-\nright : D / ->\nJump : Space',
+            {
+                fontSize: '22px',
+                fill: '#ffffff',
+                align: 'left'
+            }
+        ).setOrigin(0.5);
 
         // =============================================
-        // BOUTON BACK
+        // BOUTON RETOUR
         // =============================================
         ui.create({
             x: centerX,
@@ -55,7 +60,7 @@ class ScnControls extends Phaser.Scene {
             text: 'BACK',
             clickSound: 'clickWater',
             callback: () => {
-                Log.info('→ Retour menu');
+                Log.info('-> Retour menu');
                 this.scene.start('ScnMenuStart');
             }
         });

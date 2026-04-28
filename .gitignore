@@ -8,6 +8,10 @@ convertor.ps1
 convert-assets.ps1
 convert-to-*.ps1
 convert-to-*.php
+indexDev.html
+js/mainDev.js
+js/dev/
+Dev/
 
 # ====================== Fichiers temporaires ======================
 *.log
@@ -16,21 +20,21 @@ convert-to-*.php
 *.backup
 *.old
 
-# ====================== Fichiers système ======================
+# ====================== Fichiers systeme ======================
 .DS_Store
 Thumbs.db
 *.lock
 
-# ====================== Dossiers à ignorer ======================
+# ====================== Dossiers a ignorer ======================
 assets/images/*.png
 assets/images/*.jpg
 assets/images/*.jpeg
 assets/sounds/*.mp3
 assets/sounds/*.wav
 
-# (On garde seulement les .webp et .m4a après conversion)
+# (On garde seulement les .webp et .m4a apres conversion)
 
-# Dossiers qui pourraient apparaître plus tard
+# Dossiers qui pourraient apparaitre plus tard
 node_modules/
 dist/
 build/

@@ -1,12 +1,15 @@
 // =============================================
 // Logger.js
-// Instance globale pour faciliter les logs dans la console
-// Avec des styles et des emojis pour rendre ça plus sympa
+// Petit helper de logs styles pour le developpement
 // =============================================
 
 class Logger {
 
     constructor() {
+        // =============================================
+        // STYLES DISPONIBLES
+        // Chaque type de log possede sa couleur / son style.
+        // =============================================
         this.styles = {
             success: 'color: #00ff88; font-weight: bold;',
             error:   'color: #ff4444; font-weight: bold;',
@@ -18,20 +21,27 @@ class Logger {
     }
 
     log(message, type = 'info', extraStyle = '') {
+        // =============================================
+        // METHODE GENERIQUE
+        // =============================================
         const style = this.styles[type] || this.styles.info;
         console.log(`%c${message}`, style + extraStyle);
     }
 
-    success(message) { this.log(`✅ ${message}`, 'success'); }
-    error(message)   { this.log(`❌ ${message}`, 'error'); }
-    warning(message) { this.log(`⚠️  ${message}`, 'warning'); }
-    info(message)    { this.log(`📌 ${message}`, 'info'); }
-    debug(message)   { this.log(`🔧 ${message}`, 'debug'); }
+    // =============================================
+    // RACCOURCIS DE LOGS
+    // =============================================
+    success(message) { this.log(`[OK] ${message}`, 'success'); }
+    error(message)   { this.log(`[ERR] ${message}`, 'error'); }
+    warning(message) { this.log(`[WARN] ${message}`, 'warning'); }
+    info(message)    { this.log(`[INFO] ${message}`, 'info'); }
+    debug(message)   { this.log(`[DEBUG] ${message}`, 'debug'); }
     title(message)   { this.log(message, 'title'); }
 }
 
-// === CRÉATION DE L'INSTANCE GLOBALE ===
+// =============================================
+// INSTANCE GLOBALE
+// =============================================
 const Log = new Logger();
 
-// export pour pouvoir l'importer partout
 export default Log;
